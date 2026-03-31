@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hello_friend</title>
+
+<style>
+body{
+ background:black;
+ color:red;
+ font-family:monospace;
+ padding:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>:D</h2>
+
+<button onclick="start()">Кнопочка:)</button>
+
+<div id="info"></div>
+
+<script>
+
+function start(){
+
+// уведомление
+if (Notification.permission === "granted") {
+  new Notification("Привет от Hello_friend :D");
+} else if (Notification.permission !== "denied") {
+  Notification.requestPermission().then(permission => {
+    if (permission === "granted") {
+      new Notification("Привет от Hello_friend :D");
+    }
+  });
+}
+
+// настоящая информация
+let info = "";
+info += "Браузер: " + navigator.userAgent + "<br>";
+info += "Язык: " + navigator.language + "<br>";
+info += "Экран: " + screen.width + "x" + screen.height + "<br>";
+
+// фейковая информация
+info += "IP: 192.168.43.27<br>";
+info += "Камера: UltraVision 64MP<br>";
+
+document.getElementById("info").innerHTML = info;
+
+}
+
+</script>
+
+</body>
+</html>
