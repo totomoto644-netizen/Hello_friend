@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libra AI</title>
+    <style>
+        body { background:#111; color:#00ff88; font-family:monospace; padding:20px; }
+        #chat { white-space:pre-line; margin-bottom:20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        input { width:70%; padding:10px; background:#111; color:#00ff88; border:1px solid #00ff88; }
+        button { padding:10px; background:#111; color:#00ff88; border:1px solid #00ff88; cursor:pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Libra AI</h2>
+
+    <div id="chat">
+        Libra: Привет! Напиши мне что-нибудь.
+    </div>
+
+    <input id="input" placeholder="Сообщение">
+    <button onclick="send()">Send</button>
+
+    <script>
+        function ai(text) {
+            text = text.toLowerCase();
+
+            if(text.includes("привет")) return "Привет!";
+            if(text.includes("хелоу")) return "Х#ЛОУ ФРИЕНД ЛУ4ШИЙ!!";
+            if(text.includes("фриенд")) return "Е(ть ВОПРОСЫ В ТЕЛГРЕ№; К СОЗДАТЕЛЮ ЮЗ HEII0_FRIEND";
+            if(text.includes("зетра")) return "Зетра хороший ну он немного огресивный:(";
+            if(text.includes("зетра хороший")) return "Я незнаю ну фантик плохой:(";
+            if(text.includes("плохой")) return ":(";
+            if(text.includes("как дела")) return "У меня всё хорошо.";
+            if(text.includes("кто ты")) return "Я Libra AI.";
+            if(text.includes("что ты умеешь")) return "Я могу общаться с тобой.";
+            if(text.includes("шутка")) return "Почему программисты любят ночь? Потому что меньше багов видно 😄";
+
+            return "Прости, я еще не знаю таких слов. Надеюсь, ты меня не обижаешь?";
+        } // <--- ВОТ ЭТА СКОБКА БЫЛА ПРОПУЩЕНА
+
+        function send() {
+            let input = document.getElementById("input");
+            let message = input.value;
+            if (!message.trim()) return; // Чтобы не отправлять пустые сообщения
+
+            let chat = document.getElementById("chat");
+            chat.innerHTML += "\nТы: " + message;
+
+            let response = ai(message);
+            chat.innerHTML += "\nLibra: " + response;
+
+            input.value = "";
+            // Прокрутка вниз, если сообщений будет много
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    </script>
+</body>
+</html>
