@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hello_friend</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-
 body{
  background:black;
  color:red;
@@ -32,29 +29,14 @@ button{
  white-space:pre-line;
 }
 
-/* адаптация для телефона */
 @media (max-width:600px){
-
-h2{
- font-size:24px;
+ h2{font-size:24px;}
+ button{width:100%; font-size:22px; padding:15px;}
+ #info{font-size:16px;}
 }
-
-button{
- width:100%;
- font-size:22px;
- padding:15px;
-}
-
-#info{
- font-size:16px;
-}
-
-}
-
 </style>
 
 </head>
-
 <body>
 
 <h2>:D Hello_friend</h2>
@@ -64,57 +46,30 @@ button{
 <div id="info"></div>
 
 <script>
-
 function typeText(text, elementId, speed){
-
-let i = 0;
-let element = document.getElementById(elementId);
-element.innerHTML = "";
-
-function typing(){
- if(i < text.length){
-   element.innerHTML += text.charAt(i);
-   i++;
-   setTimeout(typing, speed);
+ let i = 0;
+ let element = document.getElementById(elementId);
+ element.innerHTML = "";
+ function typing(){
+   if(i < text.length){
+     element.innerHTML += text.charAt(i);
+     i++;
+     setTimeout(typing, speed);
+   }
  }
-}
-
-typing();
-
+ typing();
 }
 
 function start(){
+ let info = "";
+ info += "Браузер: " + navigator.userAgent + "\n";
+ info += "Язык: " + navigator.language + "\n";
+ info += "Экран: " + screen.width + "x" + screen.height + "\n";
+ info += "IP: 192.168.43.27\n";
+ info += "Камера: UltraVision 64MP\n";
 
-// уведомление
-if (Notification.permission === "granted") {
- new Notification("Привет от Hello_friend :D");
-} 
-else if (Notification.permission !== "denied") {
-
- Notification.requestPermission().then(permission => {
-
-   if (permission === "granted") {
-     new Notification("Привет от Hello_friend :D");
-   }
-
- });
-
+ typeText(info,"info",30);
 }
-
-// информация
-let info = "";
-
-info += "Браузер: " + navigator.userAgent + "\n";
-info += "Язык: " + navigator.language + "\n";
-info += "Экран: " + screen.width + "x" + screen.height + "\n";
-
-info += "IP: 192.168.43.27\n";
-info += "Камера: UltraVision 64MP\n";
-
-typeText(info,"info",30);
-
-}
-
 </script>
 
 </body>
