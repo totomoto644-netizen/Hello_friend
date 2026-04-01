@@ -10,19 +10,40 @@ body{
  font-family:monospace;
  padding:20px;
 }
+
+#info{
+ margin-top:20px;
+ font-size:18px;
+}
 </style>
 
 </head>
 
 <body>
 
-<h2>:D</h2>
+<h2>:D Hello_friend</h2>
 
-<button onclick="start()">Кнопочка:)</button>
+<button onclick="start()">Кнопочка :)</button>
 
 <div id="info"></div>
 
 <script>
+
+function typeText(text, elementId, speed){
+ let i = 0;
+ let element = document.getElementById(elementId);
+ element.innerHTML = "";
+
+ function typing(){
+   if(i < text.length){
+     element.innerHTML += text.charAt(i);
+     i++;
+     setTimeout(typing, speed);
+   }
+ }
+
+ typing();
+}
 
 function start(){
 
@@ -37,17 +58,16 @@ if (Notification.permission === "granted") {
   });
 }
 
-// настоящая информация
+// информация
 let info = "";
-info += "Браузер: " + navigator.userAgent + "<br>";
-info += "Язык: " + navigator.language + "<br>";
-info += "Экран: " + screen.width + "x" + screen.height + "<br>";
+info += "Браузер: " + navigator.userAgent + "\n";
+info += "Язык: " + navigator.language + "\n";
+info += "Экран: " + screen.width + "x" + screen.height + "\n";
+info += "IP: 192.168.43.27\n";
+info += "Камера: UltraVision 64MP\n";
 
-// фейковая информация
-info += "IP: 192.168.43.27<br>";
-info += "Камера: UltraVision 64MP<br>";
-
-document.getElementById("info").innerHTML = info;
+// печать текста
+typeText(info, "info", 30);
 
 }
 
