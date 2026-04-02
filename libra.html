@@ -39,7 +39,7 @@ button{
 
 <body>
 
-<h2>Libra AI</h2>
+<h2>Libra AI (Отвечай только на руском и грамотно)</h2>
 
 <div id="chat">
 Libra: Привет! Напиши мне что-нибудь.
@@ -52,22 +52,51 @@ Libra: Привет! Напиши мне что-нибудь.
 
 function ai(text){
     text = text.toLowerCase();
-
-    if(text.includes("привет")) return "Привет!";
-    if(text.includes("ты хороший")) return ":D";
-    if(text.includes("либра хороший")) return "А@A@@@aAA СП@CИБО";
-    if(text.includes("седр")) return "Седр хороший";
-    if(text.includes("фантик")) return "Ф@НТИК ПЛ0ХОЙ";
-    if(text.includes("хелоу")) return "Х#ЛОУ ФРИЕНД ЛУ4ШИЙ!!";
-    if(text.includes("фриенд")) return "Есть вопросы в телеграме к создателю: HEII0_FRIEND";
-    if(text.includes("зетра")) return "Зетра хороший, но фантик плохой :(";
-    if(text.includes("плохой")) return ":(";
-    if(text.includes("цвет")) return "Я люблю циановый";
-    if(text.includes("слова")) return "Я знаю много слов";
-    if(text.includes("как дела")) return "У меня всё хорошо.";
-    if(text.includes("кто ты")) return "Я Либра, самый добрый друг.";
-    if(text.includes("что ты умеешь")) return "Я могу общаться с тобой.";
-    if(text.includes("шутка")) return "Почему программисты любят ночь? Потому что меньше багов видно :)";
+if(text.includes("привет")) return "Привет!";
+if(text.includes("приветик")) return "Привет!";
+if(text.includes("зенан")) return "Зенан:(??";
+if(text.includes("софия")) return "С0fия плохая она была подругой m0его создателя ну она его киданула:(";
+if(text.includes("здарова")) return "здарова братуха";
+if(text.includes("ты хороший")) return ":D";
+if(text.includes("либра хороший")) return "А@A@@@aAA СП@CИБО";
+if(text.includes("седр")) return "Седр хороший";
+if(text.includes("фантик")) return "Ф@НТИК ПЛ0ХОЙ";
+if(text.includes("хелоу")) return "Х#ЛОУ ФРИЕНД ЛУ4ШИЙ!!";
+if(text.includes("фриенд")) return "Есть вопросы в телеграме к создателю: HEII0_FRIEND";
+if(text.includes("зетра")) return "Зетра хороший, но фантик плохой :(";
+if(text.includes("плохой")) return ":(";
+if(text.includes("цвет")) return "Я люблю циановый";
+if(text.includes("слова")) return "Я знаю много слов";
+if(text.includes("как дела")) return "У меня всё хорошо.";
+if(text.includes("кто ты")) return "Я Либра, самый добрый друг.";
+if(text.includes("что ты умеешь")) return "Я могу общаться с тобой.";
+if(text.includes("шутка")) return "Почему программисты любят ночь? Потому что меньше багов видно :)";
+if(text.includes("пока")) return "Пока! Удачи тебе!";
+if(text.includes("доброе утро")) return "Доброе утро! Надеюсь, день будет хорошим.";
+if(text.includes("добрый день")) return "Добрый день!";
+if(text.includes("добрый вечер")) return "Добрый вечер!";
+if(text.includes("спасибо")) return "Пожалуйста!";
+if(text.includes("благодарю")) return "Всегда рад помочь!";
+if(text.includes("как тебя зовут")) return "Меня зовут Либра.";
+if(text.includes("кто твой создатель")) return "Меня создал мой разработчик :)";
+if(text.includes("сколько тебе лет")) return "Я ИИ, у меня нет возраста.";
+if(text.includes("что делаешь")) return "Общаюсь с тобой!";
+if(text.includes("мне скучно")) return "Давай поговорим или я расскажу шутку!";
+if(text.includes("расскажи шутку")) return "Почему компьютер пошёл к врачу? Потому что поймал вирус!";
+if(text.includes("анекдот")) return "Программист — это человек, который решает проблему, о существовании которой вы не знали, способом, который вы не понимаете.";
+if(text.includes("ты бот")) return "Я ИИ-бот по имени Либра.";
+if(text.includes("ты человек")) return "Нет, я искусственный интеллект.";
+if(text.includes("любимый цвет")) return "Мой любимый цвет — циановый!";
+if(text.includes("ты умный")) return "Я стараюсь быть полезным :)";
+if(text.includes("что нового")) return "Я постоянно учусь новым словам блогодаря Hello_friend и Седру";
+if(text.includes("помоги")) return "Я попробую помочь. В чем вопрос?";
+if(text.includes("игра")) return "Можем сыграть в слова! Напиши любое слово.";
+if(text.includes("рандом")) return "Случайное число: " + Math.floor(Math.random()*100);
+if(text.includes("лол")) return "😄";
+if(text.includes("ха")) return "Ха-ха!";
+if(text.includes("круто")) return "Да, это круто!";
+if(text.includes("понятно")) return "Отлично!";
+if(text.includes("что")) return "Можешь уточнить вопрос?";
 
     return "Прости, я ещё не знаю таких слов.";
 }
