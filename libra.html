@@ -1,63 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libra AI</title>
-    <style>
-        body { background:#111; color:#00ff88; font-family:monospace; padding:20px; }
-        #chat { white-space:pre-line; margin-bottom:20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        input { width:70%; padding:10px; background:#111; color:#00ff88; border:1px solid #00ff88; }
-        button { padding:10px; background:#111; color:#00ff88; border:1px solid #00ff88; cursor:pointer; }
-    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libra AI</title>
+
+<style>
+body{
+    background:#111;
+    color:#00ff88;
+    font-family:monospace;
+    padding:20px;
+}
+
+#chat{
+    white-space:pre-line;
+    margin-bottom:20px;
+    border-bottom:1px solid #333;
+    padding-bottom:10px;
+}
+
+input{
+    width:70%;
+    padding:10px;
+    background:#111;
+    color:#00ff88;
+    border:1px solid #00ff88;
+}
+
+button{
+    padding:10px;
+    background:#111;
+    color:#00ff88;
+    border:1px solid #00ff88;
+    cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-    <h2>Libra AI</h2>
+<h2>Libra AI</h2>
 
-    <div id="chat">
-        Libra: Привет! Напиши мне что-нибудь.
-    </div>
+<div id="chat">
+Libra: Привет! Напиши мне что-нибудь.
+</div>
 
-    <input id="input" placeholder="Сообщение">
-    <button onclick="send()">Send</button>
+<input id="input" placeholder="Сообщение">
+<button onclick="send()">Send</button>
 
-    <script>
-        function ai(text) {
-            text = text.toLowerCase();
+<script>
 
-            if(text.includes("привет")) return "Привет!";
-            if(text.includes("ты хороший")) return ":D";
-            if(text.includes("либра хороший")) return "А@A@@@aAA СП@CИБО";
-            if(text.includes("седр")) return "Седр хороший";
-            if(text.includes("фантик")) return "Ф@НТИК ПЛ0ХОЙ";
-            if(text.includes("хелоу")) return "Х#ЛОУ ФРИЕНД ЛУ4ШИЙ!!";
-            if(text.includes("фриенд")) return "Е(ть ВОПРОСЫ В ТЕЛГРЕ№; К СОЗДАТЕЛЮ ЮЗ HEII0_FRIEND";
-            if(text.includes("зетра")) return "Зетра хороший ну фантик плохой:(";
-            if(text.includes("плохой")) return ":(";
-            if(text.includes("цвет")) return "Я люблю циановый";
-            if(text.includes("слова")) return "Я знаю много слов";
-            if(text.includes("как дела")) return "У меня всё хорошо.";
-            if(text.includes("кто ты")) return "Я Либра самый добрый друг";
-            if(text.includes("что ты умеешь")) return "Я могу общаться с тобой";
-            if(text.includes("шутка")) return "Почему программисты любят ночь? Потому что меньше багов видно:)";
+function ai(text){
+    text = text.toLowerCase();
 
-            return "Прости, я еще не знаю таких слов. Надеюсь, ты меня не обижаешь?";
+    if(text.includes("привет")) return "Привет!";
+    if(text.includes("ты хороший")) return ":D";
+    if(text.includes("либра хороший")) return "А@A@@@aAA СП@CИБО";
+    if(text.includes("седр")) return "Седр хороший";
+    if(text.includes("фантик")) return "Ф@НТИК ПЛ0ХОЙ";
+    if(text.includes("хелоу")) return "Х#ЛОУ ФРИЕНД ЛУ4ШИЙ!!";
+    if(text.includes("фриенд")) return "Есть вопросы в телеграме к создателю: HEII0_FRIEND";
+    if(text.includes("зетра")) return "Зетра хороший, но фантик плохой :(";
+    if(text.includes("плохой")) return ":(";
+    if(text.includes("цвет")) return "Я люблю циановый";
+    if(text.includes("слова")) return "Я знаю много слов";
+    if(text.includes("как дела")) return "У меня всё хорошо.";
+    if(text.includes("кто ты")) return "Я Либра, самый добрый друг.";
+    if(text.includes("что ты умеешь")) return "Я могу общаться с тобой.";
+    if(text.includes("шутка")) return "Почему программисты любят ночь? Потому что меньше багов видно :)";
 
-        function send() {
-            let input = document.getElementById("input");
-            let message = input.value;
-            if (!message.trim()) return; // Чтобы не отправлять пустые сообщения
+    return "Прости, я ещё не знаю таких слов.";
+}
 
-            let chat = document.getElementById("chat");
-            chat.innerHTML += "\nТы: " + message;
+function send(){
+    let input = document.getElementById("input");
+    let message = input.value;
 
-            let response = ai(message);
-            chat.innerHTML += "\nLibra: " + response;
+    if(!message.trim()) return;
 
-            input.value = "";
-            // Прокрутка вниз, если сообщений будет много
-            window.scrollTo(0, document.body.scrollHeight);
-        }
-    </script>
+    let chat = document.getElementById("chat");
+
+    chat.innerHTML += "\nТы: " + message;
+
+    let response = ai(message);
+
+    chat.innerHTML += "\nLibra: " + response;
+
+    input.value = "";
+
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+document.getElementById("input").addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        send();
+    }
+});
+
+</script>
+
 </body>
 </html>
