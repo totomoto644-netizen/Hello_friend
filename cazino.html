@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Мини Казино</title>
+
+<style>
+
+body{
+background:black;
+color:gold;
+text-align:center;
+font-family:Arial;
+margin:0;
+padding:20px;
+}
+
+h1{
+font-size:7vw;
+}
+
+.slot{
+font-size:12vw;
+margin:20px 0;
+}
+
+.panel{
+font-size:5vw;
+margin:10px;
+}
+
+button{
+font-size:5vw;
+padding:15px 25px;
+border:none;
+border-radius:10px;
+background:gold;
+color:black;
+}
+
+button:active{
+transform:scale(0.95);
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🎰 Мини Казино</h1>
+
+<div class="panel">Баланс: <span id="money">100</span> ₴</div>
+<div class="panel">Долг: <span id="debt">0</span> ₴</div>
+
+<div class="slot" id="slot">🍒 🍋 ⭐</div>
+
+<button onclick="spin()">Крутить (-10₴)</button>
+
+<script>
+
+let money = 100
+let debt = 0
+
+function spin(){
+
+const items = ["🍒","🍋","⭐","💎","7️⃣"]
+
+let a = items[Math.floor(Math.random()*items.length)]
+let b = items[Math.floor(Math.random()*items.length)]
+let c = items[Math.floor(Math.random()*items.length)]
+
+document.getElementById("slot").innerHTML = a+" "+b+" "+c
+
+money -= 10
+
+if(a===b && b===c){
+alert("ДЖЕКПОТ +100₴ 🎉")
+money += 100
+}
+
+if(money < 0){
+debt += Math.abs(money)
+money = 0
+alert("⚠ У тебя долг!")
+}
+
+document.getElementById("money").innerText = money
+document.getElementById("debt").innerText = debt
+
+}
+
+</script>
+
+</body>
+</html>
