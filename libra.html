@@ -42,7 +42,7 @@ button{
 <h2>Libra AI (Отвечай только на руском и грамотно)</h2>
 
 <div id="chat">
-Libra: Привет! Напиши мне что-нибудь.
+Libra: Привет! Напиши мне что-нибудь мои создатели @TJTJKmqtjDA @HEII0_FRIEND
 </div>
 
 <input id="input" placeholder="Сообщение">
@@ -52,6 +52,11 @@ Libra: Привет! Напиши мне что-нибудь.
 
 function ai(text){
     text = text.toLowerCase();
+if(text.includes("пр")) return "Привет!";
+if(text.includes("роскомнадзор надо запретить?")) return "Конечно!!! Лучше надо запретить Роскомнадзор чем другие приложение и игры!!!";
+if(text.includes("пидор")) return "Фу материться это плохо";
+if(text.includes("далбоеб")) return "Фу материться это плохо";
+if(text.includes("")) return "Привет!";
 if(text.includes("привет")) return "Привет!";
 if(text.includes("приветик")) return "Привет!";
 if(text.includes("зенан")) return "Зенан:(??";
@@ -89,8 +94,7 @@ if(text.includes("ты человек")) return "Нет, я искусствен
 if(text.includes("любимый цвет")) return "Мой любимый цвет — циановый!";
 if(text.includes("ты умный")) return "Я стараюсь быть полезным :)";
 if(text.includes("что нового")) return "Я постоянно учусь новым словам блогодаря Hello_friend и Седру";
-if(text.includes("помоги")) return "Я попробую помочь. В чем вопрос?";
-if(text.includes("игра")) return "Можем сыграть в слова! Напиши любое слово.";
+if(text.includes("помоги")) return "Я попробую помочь. В чем вопрос? Только я мало слов знаю";
 if(text.includes("рандом")) return "Случайное число: " + Math.floor(Math.random()*100);
 if(text.includes("лол")) return "😄";
 if(text.includes("ха")) return "Ха-ха!";
