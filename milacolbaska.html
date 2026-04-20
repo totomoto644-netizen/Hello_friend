@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>С Днём Рождения!</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:10px;
+  box-sizing:border-box;
+}
+.card{
+  background:white;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  padding:20px;
+  text-align:center;
+  width:100%;
+  max-width:420px;
+}
+h1{
+  color:#ff4d6d;
+  font-size:26px;
+  margin-bottom:10px;
+}
+p{
+  font-size:16px;
+}
+#game{
+  border:2px solid #333;
+  margin-top:15px;
+  background:#f7f7f7;
+  width:100%;
+  height:180px;
+  border-radius:10px;
+  touch-action:manipulation;
+}
+button{
+  margin-top:10px;
+  padding:12px 18px;
+  font-size:16px;
+  border:none;
+  border-radius:12px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+  width:100%;
+}
+button:active{ transform:scale(0.97);} 
+#restartBtn{ display:none; background:#4caf50; }
+#score{ margin-top:10px; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<div class="card">
+<h1>С Днём Рождения Мила я тебе сделал открытку</h1>
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjsMS6_14EW-GBRawGxI_XjhFHL28S4c5Qdw&s" alt="Праздничная картинка" style="width:100%;border-radius:14px;margin:10px 0;">
+<p>Пусть этот день будет ярким и прекрасным</p>
+<p>Нажми на экран или кнопку чтобы прыгать в этой мини игре</p>
+
+<button onclick="jump()">Прыжок</button>
+<button id="restartBtn" onclick="restartGame()">🔄 Играть снова</button>
+
+<canvas id="game"></canvas>
+
+<p id="score">Ибупрофены: 0</p>
+</div>
+
+<script>
+const canvas=document.getElementById('game');
+const ctx=canvas.getContext('2d');
+const restartBtn=document.getElementById('restartBtn');
+
+function resize(){
+ canvas.width=canvas.offsetWidth;
+ canvas.height=canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize',resize);
+
+let player, obstacle, gravity, score, gameOver, ground;
+
+function init(){
+ ground=canvas.height-30;
+ player={x:40,y:ground,w:28,h:28,vy:0,jumping:false};
+ obstacle={x:canvas.width,y:ground+5,w:20,h:35};
+ gravity=0.7;
+ score=0;
+ gameOver=false;
+ document.getElementById("score").innerText="Очки: 0";
+ restartBtn.style.display="none";
+ update();
+}
+
+const playerImg = new Image();
+playerImg.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjsMS6_14EW-GBRawGxI_XjhFHL28S4c5Qdw&s";
+
+function drawPlayer(){
+ ctx.drawImage(playerImg, player.x, player.y, player.w, player.h);
+}
+
+function drawObstacle(){
+ ctx.fillStyle="#333";
+ ctx.fillRect(obstacle.x,obstacle.y,obstacle.w,obstacle.h);
+}
+
+function jump(){
+ if(!player.jumping && !gameOver){
+  player.vy=-13;
+  player.jumping=true;
+ }
+}
+
+document.addEventListener("keydown",e=>{
+ if(e.code==="Space") jump();
+});
+
+canvas.addEventListener("touchstart",jump);
+canvas.addEventListener("mousedown",jump);
+
+function update(){
+ if(gameOver) return;
+
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ ground=canvas.height-30;
+
+ player.y+=player.vy;
+ player.vy+=gravity;
+
+ if(player.y>=ground){
+  player.y=ground;
+  player.jumping=false;
+ }
+
+ obstacle.x-=canvas.width*0.015;
+
+ if(obstacle.x<-obstacle.w){
+  obstacle.x=canvas.width;
+  score++;
+  document.getElementById("score").innerText="Очки: "+score;
+ }
+
+ if(player.x<obstacle.x+obstacle.w &&
+    player.x+player.w>obstacle.x &&
+    player.y<obstacle.y+obstacle.h &&
+    player.y+player.h>obstacle.y){
+     endGame();
+ }
+
+ drawPlayer();
+ drawObstacle();
+
+ requestAnimationFrame(update);
+}
+
+function endGame(){
+ gameOver=true;
+ restartBtn.style.display="block";
+ ctx.font="24px Arial";
+ ctx.fillStyle="red";
+ ctx.textAlign="center";
+ ctx.fillText("ИБУПРОФЕН",canvas.width/2,canvas.height/2);
+}
+
+function restartGame(){
+ init();
+}
+
+init();
+</script>
+
+</body>
+</html>
