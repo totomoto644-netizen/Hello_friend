@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Батл Рисования</title>
+    <style>
+        body { background: #1a1a1a; color: white; text-align: center; font-family: 'Segoe UI', sans-serif; }
+        canvas { border: 5px solid #333; background: white; border-radius: 10px; cursor: crosshair; }
+        .controls { margin: 15px; }
+        .color-btn { width: 30px; height: 30px; border: 2px solid white; cursor: pointer; border-radius: 50%; display: inline-block; margin: 0 5px; }
+        .ui-panel { background: #333; padding: 20px; border-radius: 15px; display: inline-block; margin-top: 10px; min-width: 300px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; border: none; background: #4CAF50; color: white; transition: 0.3s; }
+        button:hover { background: #45a049; }
+        #status { font-weight: bold; color: #ffeb3b; margin-top: 10px; height: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Батл Рисования</h1>
+    
+    <div class="controls">
+        <div class="color-btn" style="background: red;" onclick="changeColor('red')"></div>
+        <div class="color-btn" style="background: blue;" onclick="changeColor('blue')"></div>
+        <div class="color-btn" style="background: green;" onclick="changeColor('green')"></div>
+        <div class="color-btn" style="background: black;" onclick="changeColor('black')"></div>
+        <div class="color-btn" style="background: #ffa500;" onclick="changeColor('#ffa500')"></div>
+    </div>
+
+    <canvas id="paint" width="600" height="400"></canvas>
+
+    <div class="ui-panel">
+        <div id="status">Нарисуй что-нибудь и нажми "Готово!"</div>
+        <br>
+        <button onclick="startBattle()">ГОТОВО / БАТЛ</button>
+        <button style="background: #f44336;" onclick="clearCanvas()">Очистить</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('paint');
+        const ctx = canvas.getContext('2d');
+        let painting = false;
+        let currentColor = 'red';
+
+        // Функции рисования
+        function changeColor(color) { currentColor = color; }
+        function startPosition(e) { painting = true; draw(e); }
+        function finishedPosition() { painting = false; ctx.beginPath(); }
+
+        function draw(e) {
+            if (!painting) return;
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = currentColor;
+
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+        // Имитация "Онлайна" и Батла
+        function startBattle() {
+            const status = document.getElementById('status');
+            status.innerText = "Ищем соперника...";
+            
+            setTimeout(() => {
+                status.innerText = "Соперник найден! Идет голосование...";
+                
+                setTimeout(() => {
+                    const winner = Math.random() > 0.5 ? "ТЫ ВЫИГРАЛ! 🎉" : "ТЫ ПРОИГРАЛ... Соперник был чуть лучше.";
+                    status.innerText = winner;
+                    if(winner.includes("ВЫИГРАЛ")) status.style.color = "#4CAF50";
+                    else status.style.color = "#f44336";
+                }, 2000);
+            }, 1500);
+        }
+
+        canvas.addEventListener('mousedown', startPosition);
+        canvas.addEventListener('mouseup', finishedPosition);
+        canvas.addEventListener('mousemove', draw);
+    </script>
+</body>
+</html>
