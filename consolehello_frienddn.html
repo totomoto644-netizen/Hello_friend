@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Console HF DN Mobile</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0c0c0c;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            /* Чтобы на мобилках не прыгала высота из-за панелей браузера */
+            height: calc(var(--vh, 1vh) * 100);
+            overflow: hidden;
+            font-size: 16px; /* Минимум 16px, чтобы iPhone не зумил при вводе */
+        }
+
+        #output {
+            flex-grow: 1;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-bottom: 10px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #004400;
+        }
+
+        .input-line {
+            display: flex;
+            align-items: center;
+            padding-bottom: env(safe-area-inset-bottom); /* Отступ для безрамочных айфонов */
+        }
+
+        .prompt {
+            color: #00ff00;
+            margin-right: 8px;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: inherit;
+            font-size: 18px; /* Чуть крупнее для удобства на тачскрине */
+            outline: none;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* Цвета для оформления */
+        .header { color: #5555ff; font-weight: bold; }
+        .error { color: #ff3333; }
+        .success { color: #ffff00; }
+        .link-line { margin: 5px 0; }
+    </style>
+</head>
+<body onclick="document.getElementById('commandInput').focus()">
+
+<div id="output"></div>
+
+<div class="input-line">
+    <span class="prompt">></span>
+    <input type="text" id="commandInput" autofocus autocomplete="off" inputmode="numeric">
+</div>
+
+<script>
+    // Фикс высоты для мобильных браузеров
+    function setVH() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    window.addEventListener('resize', setVH);
+    setVH();
+
+    const output = document.getElementById('output');
+    const input = document.getElementById('commandInput');
+
+    const menu = {
+        "1": { name: "Hello Friend", url: "https://totomoto644-netizen.github.io/Hello_friend/" },
+        "2": { name: "Libra AI", url: "https://totomoto644-netizen.github.io/Hello_friend/libra.html" },
+        "3": { name: "Cazino", url: "https://totomoto644-netizen.github.io/Hello_friend/cazino.html" },
+        "4": { name: "TextIQ", url: "https://totomoto644-netizen.github.io/Hello_friend/textiq.html" },
+        "5": { name: "Paint Online", url: "https://totomoto644-netizen.github.io/Hello_friend/paintonl.html" },
+        "6": { name: "Дневник (ЗАПАРОЛЕНО)", url: "https://totomoto644-netizen.github.io/Hello_friend/diary.html", protected: true }
+    };
+
+    function print(text, className = "") {
+        const div = document.createElement('div');
+        div.textContent = text;
+        if (className) div.className = className;
+        output.appendChild(div);
+        output.scrollTop = output.scrollHeight;
+    }
+
+    function showMenu() {
+        print("--- CONSOLE HF DN MOBILE ---", "header");
+        print("Выбери номер страницы:");
+        for (let key in menu) {
+            print(`${key}. ${menu[key].name}`, "link-line");
+        }
+        print("----------------------------");
+    }
+
+    showMenu();
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const val = input.value.trim();
+            if (val) {
+                print(`> ${val}`);
+                handleInput(val);
+            }
+            input.value = '';
+        }
+    });
+
+    function handleInput(cmd) {
+        if (cmd === 'cls') {
+            output.innerHTML = '';
+            showMenu();
+        } else if (menu[cmd]) {
+            const item = menu[cmd];
+            if (item.protected) {
+                const pass = prompt("Password:");
+                if (pass === "drug") {
+                    print("OK. Launching...", "success");
+                    window.location.href = item.url;
+                } else {
+                    print("ACCESS DENIED", "error");
+                }
+            } else {
+                print(`Opening ${item.name}...`);
+                window.location.href = item.url;
+            }
+        } else {
+            print(`Err: ${cmd} not found`, "error");
+        }
+    }
+</script>
+</body>
+</html>
